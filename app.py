@@ -9,8 +9,8 @@ CORS(app)
 @app.route("/", methods=["GET", "POST"])
 def index():
     print("Entrou")
-    return {"abc":"123"}
-    # return render_template("index.html")
+    # return {"abc":"123"}
+    return render_template("index.html")
     
 @app.route("/liberaRacao", methods=["POST"])
 def liberaRacao():
