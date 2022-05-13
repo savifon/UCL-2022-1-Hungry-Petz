@@ -16,13 +16,13 @@ def index():
 def liberaRacao():
     motorGiro = request.get_json()
 
-    if motorGiro:
-        if "1" in motorGiro:
+    if motorGiro["cart"]:
+        if "1" in motorGiro["cart"]:
             # forward1(3)
             # sleep(4 * motorGiro["1"]["quantity"])
             # stop1()
             print("1")
-        if "2" in motorGiro:
+        if "2" in motorGiro["cart"]:
             # forward2(3)
             # sleep(4 * motorGiro["2"]["quantity"])
             # stop2()
