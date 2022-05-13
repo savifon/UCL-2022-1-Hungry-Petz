@@ -9,29 +9,25 @@ CORS(app)
 @app.route("/", methods=["GET", "POST"])
 def index():
     print("Entrou")
-    return render_template("index.html")
+    return {"abc":"123"}
+    # return render_template("index.html")
     
-@app.route("/liberaRacao", methods=["GET", "POST"])
+@app.route("/liberaRacao", methods=["POST"])
 def liberaRacao():
-    motorGiro = request.json()
-    if motorGiro["cart"][0]["id"] == 1 and motorGiro["cart"][1]["id"] == 2:
-        # forward1(3)
-        # forward2(3)
-        # sleep(4)
-        # stop1()
-        # stop2()
-        print(1)
-    elif motorGiro["cart"][0]["id"] == 1:
-        # forward1(3)
-        # sleep(4)
-        # stop1()
-        print(2)
+    motorGiro = request.get_json()
 
-    elif motorGiro["cart"][1]["id"] == 2:
-        # forward2(3)
-        # sleep(4)
-        # stop2()
-        print(3)
+    if motorGiro:
+        if "1" in motorGiro:
+            # forward1(3)
+            # sleep(4 * motorGiro["1"]["quantity"])
+            # stop1()
+            print("1")
+        if "2" in motorGiro:
+            # forward2(3)
+            # sleep(4 * motorGiro["2"]["quantity"])
+            # stop2()
+            print ("2")
+
     return {"liberaRacao":True}
 
 app.run(port=5587)
