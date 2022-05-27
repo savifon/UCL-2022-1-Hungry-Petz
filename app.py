@@ -1,15 +1,13 @@
 from flask import Flask, render_template, request
 #from controlaMotor import *
 from time import sleep
-from flask_cors import CORS
+# from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    print("Entrou")
-    # return {"abc":"123"}
     return render_template("index.html")
     
 @app.route("/liberaRacao", methods=["POST"])
