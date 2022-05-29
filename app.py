@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request
-#from controlaMotor import *
+from controlaMotor import *
 from time import sleep
-# from flask_cors import CORS
 
 app = Flask(__name__)
-# CORS(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -16,14 +14,14 @@ def liberaRacao():
 
     if motorGiro["cart"]:
         if "1" in motorGiro["cart"]:
-            # forward1(3)
-            # sleep(4 * motorGiro["1"]["quantity"])
-            # stop1()
+            forward2(3)
+            sleep(4 * motorGiro["2"]["quantity"])
+            stop2()
             print("1")
         if "2" in motorGiro["cart"]:
-            # forward2(3)
-            # sleep(4 * motorGiro["2"]["quantity"])
-            # stop2()
+            forward1(3)
+            sleep(4 * motorGiro["1"]["quantity"])
+            stop1()
             print ("2")
 
     return {"liberaRacao":True}
