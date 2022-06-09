@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 from controlaMotor import *
 from time import sleep
+import requests
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -12,21 +14,20 @@ def index():
     
 @app.route("/liberaRacao", methods=["POST"])
 def liberaRacao():
-    motorGiro = request.get_json()
-    # print(motorGiro)
+    dados = request.get_json()
 
-    if motorGiro["cart"]:
-        if "1" in motorGiro["cart"]:
+    if dados["cart"]:
+        if "1" in dados["cart"]:
             forward2(3)
-            sleep(4 * motorGiro["2"]["quantity"])
+            sleep(4 * dados["2"]["quantity"])
             stop2()
-            print("1")
-        if "2" in motorGiro["cart"]:
+        if "2" in dados["cart"]:
             forward1(3)
-            sleep(4 * motorGiro["1"]["quantity"])
+            sleep(4 * dados["1"]["quantity"])
             stop1()
-            print ("2")
-
+        payload = json.dumps(dados, separators=(',', ':'))
+        headers = {'Content-Type': 'application/json'}
+        requests.post("https://pivpix.herokuapp.com/dados-venda",headers=headers, data=payload)
     return {"liberaRacao":True}
 
 app.run(port=5587)
