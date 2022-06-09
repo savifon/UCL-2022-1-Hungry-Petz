@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
+from flask_cors import CORS
 from controlaMotor import *
 from time import sleep
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -11,6 +13,7 @@ def index():
 @app.route("/liberaRacao", methods=["POST"])
 def liberaRacao():
     motorGiro = request.get_json()
+    # print(motorGiro)
 
     if motorGiro["cart"]:
         if "1" in motorGiro["cart"]:
