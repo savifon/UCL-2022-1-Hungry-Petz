@@ -15,19 +15,18 @@ def index():
 @app.route("/liberaRacao", methods=["POST"])
 def liberaRacao():
     dados = request.get_json()
-
-    if dados["cart"]:
+    if dados["cart"] != None:
         if "1" in dados["cart"]:
             forward2(3)
-            sleep(4 * dados["2"]["quantity"])
+            sleep(4 * dados["cart"]["1"]["quantity"])
             stop2()
         if "2" in dados["cart"]:
             forward1(3)
-            sleep(4 * dados["1"]["quantity"])
+            sleep(4 * dados["cart"]["2"]["quantity"])
             stop1()
         payload = json.dumps(dados, separators=(',', ':'))
         headers = {'Content-Type': 'application/json'}
-        requests.post("https://pivpix.herokuapp.com/dados-venda",headers=headers, data=payload)
-    return {"liberaRacao":True}
+        requests.post("https://piv-paramia.herokuapp.com/dados-venda",headers=headers, data=payload)
+    return {"liberaRacao":dados}
 
 app.run(port=5587)
